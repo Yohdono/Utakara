@@ -1,0 +1,50 @@
+<!-- INCLUDE overall_header.html -->
+<h2>Utakara {L_LIST}</h2>
+
+<!-- IF MESSAGE -->
+	<span>{MESSAGE}</span>
+<!-- ENDIF -->
+<div class="forabg">
+	<div class="inner">
+		<ul class="topiclist">
+			<!-- a traduire -->
+			<li class="header">
+				<dl class="icon">
+					<dt class="utitle">{L_TITLE}</dt>
+				    <dd class="uorigin">{L_ORIGIN}</dd>
+				    <dd class="udate">{L_DATE}</dd>
+				    <dd class="ugrade">{L_GRADE}</dd>
+				    <dd class="uaccept">{L_STATE}</dd>
+					<!-- IF U_MCP or U_ACP -->
+					<dd class="uedit">{L_EDIT}</dd>
+					<dd class="udelete">{L_DELETE}</dd>
+					<!-- ENDIF -->
+					<!-- IF U_ACP -->
+					<dd class="uedit">{L_TRANSFER}</dd>
+					<!-- ENDIF -->
+				</dl>
+			</li>
+		</ul>
+		<ul class="topiclist forums">
+		  <!-- BEGIN list -->
+			<li>
+				<dl>
+				    <dt class="utitle">{list.TITLE}</dt>
+				    <dd class="uorigin">{list.ORIGIN}</dd>
+				    <dd class="udate">{list.DATE}</dd>
+				    <dd class="ugrade">{list.NOTE}</dd>
+					<dd class="uaccept">{list.STATUS}</dd>
+					<!-- IF U_MCP or U_ACP -->
+				    <dd class="uedit"><a href="?mode=edit&id={list.ID}">{L_EDIT}</a></dd>
+				    <dd class="udelete"><a href="?mode=delete&id={list.ID}">{L_DELETE}</a></dd>
+					<!-- ENDIF -->
+					<!-- IF U_ACP -->
+					<dd class="utransfer"><a href="?mode=transfer&id={list.ID}">{L_TRANSFER}</a></dd>
+					<!-- ENDIF -->
+				</dl>
+			</li>
+		  <!-- END list -->
+		</ul>
+	</div>
+</div>
+<!-- INCLUDE overall_footer.html -->

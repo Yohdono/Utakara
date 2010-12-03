@@ -1,0 +1,26 @@
+<!-- INCLUDE overall_header.html -->
+	<!-- BEGIN news -->
+   	<div class="forabg">
+		<div class="inner">
+
+			<ul class="topiclist">
+				<li class="header">
+					<dl class="icon">
+						<dt class="space news">{news.TITLE}</dt>
+						<dd class="id">Post:#{news.ID}</dd>
+					</dl>
+				</li>
+			</ul>
+			<ul class="topiclist forums">
+				<li class="rows news">
+					<dt class="content news">{news.CONTENT}</dt>
+					<dd class="lastpost"><span>
+						by <a href="./memberlist.php?mode=viewprofile&amp;u={news.AUTHOR_ID}" style="color: #66CC00;" class="username-coloured">{news.POSTER}</a>
+						<br />{news.DATE}<br /> </span>
+					</dd>
+				</li>
+			</ul>
+		</div>
+	</div>
+  	<!-- END news -->
+<!-- INCLUDE overall_footer.html -->

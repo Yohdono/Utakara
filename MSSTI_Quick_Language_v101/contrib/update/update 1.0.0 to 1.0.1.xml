@@ -1,0 +1,198 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<?xml-stylesheet type="text/xsl" href="modx.prosilver.en.xsl"?>
+<!--For security purposes, please check: http
+://www.phpbb.com/mods/ for the latest version of this MOD. Although MODs are checked before being allowed in the MODs Database there is no guarantee that there are no security problems within the MOD. No support will be given for MODs not found within the MODs Database which can be found at http://www.phpbb.com/mods/-->
+<mod xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://www.phpbb.com/mods/xml/modx-1.2.2.xsd">
+	<header>
+		<license>http://opensource.org/licenses/gpl-license.php GNU General Public License v2</license>
+		
+		<title lang="en">MSSTI Quick Language</title>
+
+		<description lang="en">This file provides instructions for upgrading the MOD from version 1.0.0 to 1.0.1
+		See the main install file for any additional information about the MOD.</description>
+
+		<author-notes lang="en"><![CDATA[The mod is setting for display the dropdown box for anonymous users, 
+	if you want enable it also for registered users :
+		open : root/includes/function_quick_language.php
+		find : define('QUICK_LANGUAGE_USER', false);
+		replace with : define('QUICK_LANGUAGE_USER', true);	
+	
+	-------------------------------------------------------------------
+
+	Need extra support ?
+	--------------------
+	You can contact me at http://www.mssti.com/phpbb3/]]></author-notes>
+	
+		<author-group>
+			<author>
+				<realname>Gabriel</realname>
+				<username>leviatan21</username>
+				<email>info@mssti.com</email>
+				<homepage>http://www.mssti.com/phpbb3/</homepage>
+			</author>
+		</author-group>
+		
+		<mod-version>1.0.1</mod-version>
+
+		<installation>
+			<level>easy</level>
+			<time>100</time>
+			<target-version>3.0.4</target-version>
+		</installation>
+
+		<history>
+			<entry>
+				<date>2008-01-14</date>
+				<rev-version>1.0.1</rev-version>
+				<changelog lang="en">
+					<change>[Fix] Some MOD TEAM suggestions</change>
+					<change>[Fix] Bug with Registered users</change>
+				</changelog>
+			</entry>
+			<entry>
+				<date>2008-01-03</date>
+				<rev-version>1.0.0</rev-version>
+				<changelog lang="en">
+					<change>Initial release</change>
+				</changelog>
+			</entry>
+		</history>
+	
+		<link-group>
+			<link type="parent"  href="../../Install_MSSTI_Quick_Language.xml" lang="en">Code change</link>
+		</link-group>
+	</header>
+
+	<action-group>
+		
+		<copy>
+			<file from="root/includes/function_quick_language.php" to="includes/function_quick_language.php" />
+			<file from="root/styles/prosilver/template/ucp_quick_language.html" to="styles/prosilver/template/ucp_quick_language.html" />
+			<file from="root/styles/subsilver2/template/ucp_quick_language.html" to="styles/subsilver2/template/ucp_quick_language.html" />
+		</copy>
+		
+		<open src="style.php">
+			<edit>
+				<find><![CDATA[
+// MOD : MSSTI Quick Language - START
+	if (!defined('IN_QUICK_LANGUAGE'))
+	{
+		include($phpbb_root_path . 'includes/function_quick_language.' . $phpEx);
+	}
+	$user['quick_language'] = quick_language::quick_language_setstyle( $user['user_lang'], $user, $config['default_lang'] );
+	// if the user change his language, then force to Re-cache stylesheet data
+	if ( $user['user_lang'] != $user['quick_language'] )
+	{
+		$user['user_lang']	 = $user['quick_language'];
+	}
+// MOD : MSSTI Quick Language - END
+]]></find>
+				<action type="replace-with"><![CDATA[
+// MOD : MSSTI Quick Language (v1.0.1) - START
+	if (!defined('IN_QUICK_LANGUAGE'))
+	{
+		include($phpbb_root_path . 'includes/function_quick_language.' . $phpEx);
+	}
+	$user['quick_language'] = quick_language::quick_language_setlang( $user['user_lang'], $user['user_id'], $config['cookie_name'] );
+	// if the user change his language, update it 
+	if ( $user['user_lang'] != $user['quick_language'] )
+	{
+		$user['user_lang']		= $user['quick_language'];
+	}
+// MOD : MSSTI Quick Language (v1.0.1) - END
+]]></action>
+			</edit>
+		</open>
+
+		<open src="ucp.php">
+			<edit>
+				<find><![CDATA[// MOD : MSSTI Quick Language - START
+if (!defined('IN_QUICK_LANGUAGE'))
+{
+	include($phpbb_root_path . 'includes/function_quick_language.' . $phpEx);
+}
+global $quick_language;
+$quick_language->quick_language_switch();
+// MOD : MSSTI Quick Language - END]]></find>
+				<action type="replace-with"><![CDATA[
+// MOD : MSSTI Quick Language (v1.0.1) - START
+if (!defined('IN_QUICK_LANGUAGE'))
+{
+	include($phpbb_root_path . 'includes/function_quick_language.' . $phpEx);
+}
+global $quick_language;
+$quick_language->quick_language_switch();
+// MOD : MSSTI Quick Language (v1.0.1) - END
+]]></action>
+			</edit>
+		</open>
+
+		<open src="includes/functions.php">
+			<edit>
+				<find><![CDATA[// MOD : MSSTI Quick Language - START
+	if (!defined('IN_QUICK_LANGUAGE'))
+	{
+		include($phpbb_root_path . 'includes/function_quick_language.' . $phpEx);
+	}
+	global $quick_language;
+	$quick_language->quick_language_select();
+// MOD : MSSTI Quick Language - END]]></find>
+				<action type="replace-with"><![CDATA[
+// MOD : MSSTI Quick Language (v1.0.1) - START
+	if (!defined('IN_QUICK_LANGUAGE'))
+	{
+		include($phpbb_root_path . 'includes/function_quick_language.' . $phpEx);
+	}
+	global $quick_language;
+	$quick_language->quick_language_select();
+// MOD : MSSTI Quick Language (v1.0.1) - END
+]]></action>
+			</edit>
+		</open>
+
+		<open src="includes/session.php">
+			<edit>
+				<find><![CDATA[// MOD : MSSTI Quick Language - START
+		if (!defined('IN_QUICK_LANGUAGE'))
+		{
+			include($phpbb_root_path . 'includes/function_quick_language.' . $phpEx);
+		}
+		$this->lang_name = quick_language::quick_language_setstyle( $this->lang_name, $this->data, $config['default_lang'] );
+// MOD : MSSTI Quick Language - END]]></find>
+				<action type="replace-with"><![CDATA[
+// MOD : MSSTI Quick Language (v1.0.1) - START
+		if (!defined('IN_QUICK_LANGUAGE'))
+		{
+			include($phpbb_root_path . 'includes/function_quick_language.' . $phpEx);
+		}
+		$this->lang_name = $this->data['user_lang'] = $quick_language->quick_language_setlang( $this->lang_name, $this->data['user_id'], $config['cookie_name'] );
+// MOD : MSSTI Quick Language (v1.0.1) - END
+]]></action>
+			</edit>
+		</open>
+
+		<diy-instructions lang="en"><![CDATA[IMPORTANT !
+	
+Log on to Administration Control Panel
+
+#####################################################################
+A) Purge theme :
+
+	A.1) Navigate to "STYLES" Tab.
+	A.2) Under "STYLE COMPONENTS" click on "Templates".
+	A.3) Under "Actions" click on "Refresh".
+	A.4) in the next screen, click on "Yes". ( Repeat last 2 steps to each instaled style, based off Subsilver2 ).
+	
+#####################################################################
+B) Clear cache :
+
+	B.1) Navigate to "GENERAL" Tab.
+	B.2) find "Purge the cache" click on "Run now".
+	B.3) in the next screen, click on "Yes".
+
+#####################################################################
+C) Enjoy it !.		
+]]></diy-instructions>
+
+	</action-group>
+</mod>

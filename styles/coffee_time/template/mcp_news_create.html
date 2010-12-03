@@ -1,0 +1,52 @@
+<!-- INCLUDE mcp_header.html -->
+
+<h2>{L_CREATE_NEWS}</h2>
+
+<form id="postform" method="post" action="{S_POST_ACTION}"{S_FORM_ENCTYPE}>
+	<div id="postingbox" class="panel">
+		<div class="inner">
+        	<span class="corners-top">
+            	<span></span>
+            </span>
+            <script type="text/javascript">
+			// <![CDATA[
+				onload_functions.push('apply_onkeypress_event()');
+			// ]]>
+			</script>
+            <fieldset class="fields1">
+	           	<!-- IF ERROR --><p class="error">{ERROR}</p><!-- ENDIF -->
+            	<dl>
+                	<dt>
+                    	<label for="subject">{L_SUBJECT} : </label>
+                    </dt>
+                    <dd>
+                    	<input id="subject" class="inputbox autowidth" type="text" tabindex="2" maxlength="64" size="45" name="subject" value="{SUBJECT}" />
+                    </dd>
+                <!-- DEFINE $EXTRA_POSTING_OPTIONS = 1 -->
+                   	<label for="subject">{SUBJECT} : </label>
+                    <br/>
+					<div id="message-box">
+                        <textarea name="content" id="content" rows="15" cols="100" tabindex="4" onselect="storeCaret(this);" onclick="storeCaret(this);" onkeyup="storeCaret(this);" onfocus="initInsertions();" class="inputbox">{CONTENT}</textarea>
+                    </div>
+                	<dt>
+                    	<label for="subject">{L_PUBLISHED}? : </label>
+                    </dt>
+                    <dd>
+	                    <input type="checkbox" name="published" />
+					</dd>
+                </dl>
+            </fieldset>
+            <fieldset class="submit-buttons">
+                <input class="button1 default-submit-action" type="submit" value="{L_SUBMIT}" name="post" />
+            </fieldset>
+            <span class="corners-bottom"><span></span></span>
+        </div>
+	</div>
+</form>
+<script type="text/javascript">
+// <![CDATA[
+	subPanels(show_panel);
+// ]]>
+</script>
+
+<!-- INCLUDE mcp_footer.html -->

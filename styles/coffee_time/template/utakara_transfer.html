@@ -1,0 +1,115 @@
+<!-- INCLUDE overall_header.html -->
+<!-- IF U_ACP -->
+<h2>{L_KARA_TRANSFER}</h2>
+<div id="postingbox" class="panel">
+	<div class="inner">
+		<span class="corners-top">
+			<span></span>
+		</span>
+		<h3>{L_KARA_TRANSFER}</h3>
+		<!-- IF MESSAGE -->
+			<span class="success">{MESSAGE}</span>
+		<!-- ENDIF -->
+		<form id="postform" method="post" action="./utakara.php?mode=transfer<!-- IF ID -->&id={ID}<!-- ENDIF -->" enctype="multipart/form-data">
+			<fieldset class="field1">
+				<dl>
+					<dt><label for="icon">{L_TITLE}</label></dt>
+					<dd><input id="subject" class="inputbox autowidth" type="text" name="title" value="{TITLE}"></dd>
+				</dl>
+				<dl>
+					<dt><label for="icon">{L_UTA_WHERE_FROM}</label></dt>
+					<dd><input id="origin" class="inputbox autowidth" type="text" name="origin" value="{ORIGIN}"></dd>
+				</dl>
+				<dl>
+					<dt><label for="icon">{L_UTA_NOTE}</label></dt>
+					<dd><input id="note" class="inputbox autowidth" type="text" name="note" value="{NOTE}"></dd>
+				</dl>
+				<dl>
+					<dt><label for="icon">{L_UTA_ARTIST}</label></dt>
+					<dd>
+						<select id="artists" name="artists">
+							<!-- BEGIN artists -->
+							<option value="{artists.ID}" >{artists.NAME}</option>
+							<!-- END artists -->
+						</select>
+					</dd>
+				</dl>
+
+				<dl>
+					<dt><label for="icon">{L_UTA_ORIGIN}</label></dt>
+					<dd>
+						<select id="origin" name="origin">
+							<!-- BEGIN origin -->
+							<option value="{origin.ID}" >{origin.NAME}</option>
+							<!-- END origin -->
+						</select>
+					</dd>
+				</dl>
+
+				<dl>
+					<dt><label for="icon">{L_UTA_FLAG}</label></dt>
+					<dd>
+						<select id="flag" name="flag">
+							<!-- BEGIN flag -->
+							<option value="{flag.ID}" >{flag.NAME}</option>
+							<!-- END flag -->
+						</select>
+					</dd>
+				</dl>
+
+				<dl>
+					<dt><label for="icon">{L_UTA_POSITION}</label></dt>
+					<dd>
+						<select id="position" name="position">
+							<!-- BEGIN position -->
+							<option value="{position.ID}" >{position.NAME}</option>
+							<!-- END position -->
+						</select>
+					</dd>
+				</dl>
+
+				<dl>
+					<dt><label for="icon">{L_UTA_TYPE}</label></dt>
+					<dd>
+						<select id="type" name="type">
+							<!-- BEGIN type -->
+							<option value="{type.ID}" >{type.NAME}</option>
+							<!-- END type -->
+						</select>
+					</dd>
+				</dl>
+
+				<dl>
+					<dt><label for="icon">{L_UTA_TAGS}</label></dt>
+					<dd>
+						<select id="tags" name="tags">
+							<!-- BEGIN tags -->
+							<option value="{tags.ID}" >{tags.NAME}</option>
+							<!-- END tags -->
+						</select>
+					</dd>
+				</dl>
+
+				<dl>
+					<dt><label for="icon">{L_UTA_LANG}</label></dt>
+					<dd>
+						<select id="lang" name="lang">
+							<!-- BEGIN lang -->
+							<option value="{lang.ID}" >{lang.NAME}</option>
+							<!-- END lang -->
+						</select>
+					</dd>
+				</dl>
+
+			</fieldset>
+			<fieldset class="submit-buttons">
+				<input class="button1 default-submit-action" type="submit" value="{L_SUBMIT}" name="post" tabindex="6" accesskey="s"/>
+			</fieldset>
+		</form>
+		<span class="corners-bottom">
+			<span></span>
+		</span>
+	</div>
+</div>
+<!-- ENDIF -->
+<!-- INCLUDE overall_footer.html -->

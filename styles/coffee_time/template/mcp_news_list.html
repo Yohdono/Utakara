@@ -1,0 +1,40 @@
+<!-- INCLUDE mcp_header.html -->
+
+<h2>{L_NEWS_LIST}</h2>
+
+<div class="panel">
+	<div class="inner"><span class="corners-top"><span></span></span>
+    	<table width="100%" border="1">
+            <tr>
+                <th scope="col">#id</th>
+                <th scope="col">{L_NEWS_TITLE}</th>
+                <th scope="col">{L_DATE}</th>
+                <th scope="col">{L_AUTHOR}</th>
+                <th scope="col">{L_PUBLISHED}</th>
+                <th scope="col">{L_EDIT}</th>
+            </tr>
+            <!-- BEGIN news -->
+            <tr>
+                <td>{news.ID}</td>
+                <td>{news.TITLE}</td>
+                <td>{news.DATE}</td>
+                <td>{news.POSTER}</td>
+                <!-- IF news.PUBLISHED eq 1 -->
+	                <td>{L_PUBLISHED}</td>
+                <!-- ELSE -->
+                    <td>{L_NO_PUBLISHED}</td>
+                <!-- ENDIF -->
+                <td><a href="?i=news&news_id={news.ID}&mode=edit_news">{L_EDIT}</td>
+            </tr>
+            <!-- END news -->
+        </table>
+	<span class="corners-bottom"><span></span></span>
+</div>
+
+<script type="text/javascript">
+// <![CDATA[
+	subPanels(show_panel);
+// ]]>
+</script>
+
+<!-- INCLUDE mcp_footer.html -->

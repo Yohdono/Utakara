@@ -1,0 +1,172 @@
+/*--HEADER--*/
+
+#header {
+	width: 850px;
+	margin-top: 25px;
+}
+
+#header ul {
+	list-style-type: none;
+}
+
+#header ul li {
+	float:left; 
+	display: block;
+	font-size: 1.1em; 
+	font-weight: bold; 
+	text-transform: uppercase; 
+	text-align : center;
+	line-height: 30px;
+}
+
+#header ul li a {
+	width: 92px; 
+	height: 30px; 
+	display: block; 
+	background: url("{T_THEME_PATH}/images/bg_inactive.gif") 0 0 no-repeat #66605B; 
+	color: #FDFDFD;  
+	text-decoration: none; 
+	text-align: center; 
+}
+
+#header ul li a:hover {
+	background: url("{T_THEME_PATH}/images/bg_active.gif") 0 0 no-repeat #66605B; 
+	color: #1A1917;
+}
+
+#header ul li.inactive {
+	margin: 0 0 0 1px;
+}
+
+#header ul li.active {
+	width: 92px; 
+	height: 30px; 
+	display: block; 
+	background: url("{T_THEME_PATH}/images/bg_active.gif") 0 0 no-repeat #FDFDFD; 
+	color: #1A1917; 
+	text-align: center;
+}
+
+#nav_icons_login {   
+	margin-top: 10px;
+	margin-left: 5%;
+}
+
+#nav_icons_logout {  
+	margin-top: 10px;
+	margin-left: 22%;
+}
+
+#icon_index, #icon_memberl, #icon_pms, #icon_faqq, #icon_ucpro, #icon_6, #icon_log, #icon_regist, #icon_restore, #icon_self {
+	width: 100px; 
+	height: 95px; 
+	float: left; 
+	margin: 0 10px 0 0; 
+}
+
+#icon_index a, #icon_memberl a, #icon_pms a, #icon_faqq a, #icon_ucpro a, #icon_log a, #icon_regist a, #icon_restore a, #icon_self a {
+	text-decoration: none; 
+	display: block; 
+	width: 87px; 
+	height: 95px;
+	color: #fff;
+	font-size: 1.2em;
+	letter-spacing: -0.1em;
+	padding-left: 7px;
+	padding-right: 8px;
+	font-weight: bold;
+	background-position: 0 0;
+}
+
+#icon_index a:hover, #icon_memberl a:hover, #icon_pms a:hover, #icon_faqq a:hover, #icon_ucpro a:hover,
+#icon_log a:hover, #icon_regist a:hover, #icon_restore a:hover, #icon_self a:hover {
+	background-position: 0 -95px;
+}
+
+#icon_index a { 
+	background: url("{T_THEME_PATH}/images/icon_index.png") 0 0 no-repeat;
+}
+
+#icon_memberl a {
+	background: url("{T_THEME_PATH}/images/icon_memberl.png") 0 0 no-repeat; 
+}
+
+#icon_pms a {
+	background: url("{T_THEME_PATH}/images/icon_pms.png") 0 0 no-repeat;
+}
+
+#icon_faqq a {
+	background: url("{T_THEME_PATH}/images/icon_faqq.png") 0 0 no-repeat;
+}
+
+#icon_ucpro a {
+	background: url("{T_THEME_PATH}/images/icon_ucpro.png") 0 0 no-repeat;
+}
+
+#icon_log a {
+	background: url("{T_THEME_PATH}/images/icon_log.png") 0 0 no-repeat;
+}
+
+#icon_regist a {
+	background: url("{T_THEME_PATH}/images/icon_regist.png") 0 0 no-repeat;
+}
+
+#icon_restore a {
+	background: url("{T_THEME_PATH}/images/icon_restore.png") 0 0 no-repeat;
+}
+
+#icon_self a {
+	background: url("{T_THEME_PATH}/images/icon_self.png") 0 0 no-repeat;
+}
+
+.gohst-space {
+	display: block; 
+	height: 4px; 
+	clear: both;
+}
+
+/*--FORUM--*/
+li.smally a {
+	font-size: 11px;
+	letter-spacing: -0.1em
+}
+
+.smally {
+	font-size: 11px;
+	letter-spacing: -0.1em
+}
+
+ul.forums {
+	border-right: 1px solid #A8A39D;
+	border-bottom: 1px solid #A8A39D;
+	border-left: 1px solid #A8A39D;
+}
+
+*ul.forums {
+	margin-top: 1px;
+}
+
+ul.topics {
+	border-right: 1px solid #A8A39D;
+	border-bottom: 1px solid #A8A39D;
+	border-left: 1px solid #A8A39D;
+}
+
+*ul.topics {
+	margin-top: 2px;
+}
+
+.pm-panel-message	{ margin: 0; }
+.pm-panel-message ul.profile-icons li.edit-icon	{ margin: -11px 3px 0 3px; }
+.pm-panel-message ul.profile-icons li.quote-icon	{ margin: -11px 0 0 3px; }
+.pm-panel-message ul.profile-icons li.info-icon, .pm-panel-message ul.profile-icons li.report-icon, 
+.pm-panel-message ul.profile-icons li.delete-icon, .pm-panel-message ul.profile-icons li.warn-icon { margin: -10px 3px 0 0; }
+
+/*--FOOTER--*/
+#bottom_body {
+	background: url("{T_THEME_PATH}/images/bottom_body.gif") no-repeat 0 0;
+	width: 850px;
+	height: 42px;
+	margin-bottom: 5px;
+	min-height: 47px;
+}

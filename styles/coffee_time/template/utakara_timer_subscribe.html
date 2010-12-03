@@ -1,0 +1,26 @@
+<!-- INCLUDE overall_header.html -->
+<h2>{L_TIMER}</h2>
+<div id="postingbox" class="panel">
+	<div class="inner">
+		<span class="corners-top">
+			<span></span>
+		</span>
+		<h3>{L_TIMER}</h3>
+		<form id="postform" method="post" action="./utakara.php?mode=create" enctype="multipart/form-data">
+			<fieldset class="field1">
+				<dl>
+					<dt><label for="icon">{L_USERNAME}</label></dt>
+					<dd><input id="subject" class="inputbox autowidth" type="text" name="username"></dd>
+				</dl>
+				<!-- ENDIF -->
+			</fieldset>
+			<fieldset class="submit-buttons">
+				<input class="button1 default-submit-action" type="submit" value="{L_SUBMIT}" name="post" tabindex="6" accesskey="s"/>
+			</fieldset>
+		</form>
+		<span class="corners-bottom">
+			<span></span>
+		</span>
+	</div>
+</div>
+<!-- INCLUDE overall_footer.html -->
