@@ -1,0 +1,51 @@
+<!-- INCLUDE overall_header.html -->
+<h2>{USERNAME} : {L_TIMER_PANEL}</h2>
+<div id="postingbox" class="panel">
+	<div class="inner">
+		<span class="corners-top">
+			<span>{MESSAGE}</span>
+		</span>
+		<h3>{L_TO_TIME_LIST}</h3>
+		<form id="postform" method="post" action="./utakara.php?mode=timer&section=todo" enctype="multipart/form-data">
+			<ul class="topiclist">
+				<li class="header">
+					<dl class="icon">
+						<dd class="check"> </dd>
+						<dd class="utitle">{L_TITLE}</dd>
+					    <dd class="uorigin">{L_ORIGIN}</dd>
+					    <dd class="udate">{L_DATE}</dd>
+					    <dd class="ugrade">{L_GRADE}</dd>
+					    <dd class="uaccept">{L_STATE}</dd>
+						<dd class="uedit">{L_EDIT}</dd>
+						<!-- IF U_ACP -->
+						<dd class="uedit">{L_TRANSFER}</dd>
+						<!-- ENDIF -->
+					</dl>
+				</li>
+			</ul>
+			<ul class="topiclist forums">
+			  <!-- BEGIN list -->
+				<li>
+					<dl>
+						<dd class="check"><input type="checkbox" name="wish" /></dd>
+					    <dd class="utitle">{list.TITLE}</dd>
+					    <dd class="uorigin">{list.ORIGIN}</dd>
+					    <dd class="udate">{list.DATE}</dd>
+					    <dd class="ugrade">{list.NOTE}</dd>
+						<dd class="uaccept">{list.STATUS}</dd>
+					    <dd class="uedit"><a href="?mode=timer&section=edit&id={list.ID}">{L_EDIT}</a></dd>
+						<!-- IF U_ACP -->
+						<dd class="utransfer"><a href="?mode=transfer&id={list.ID}">{L_TRANSFER}</a></dd>
+						<!-- ENDIF -->
+					</dl>
+				</li>
+			  <!-- END list -->
+			</ul>
+			<div class="submit-panel"><input type="submit" value="{L_WANT_TIME}" /> <input type="reset" value="{L_UNSELECT}"></div>
+		</form>
+		<span class="corners-bottom">
+			<span></span>
+		</span>
+	</div>
+</div>
+<!-- INCLUDE overall_footer.html -->

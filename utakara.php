@@ -16,7 +16,7 @@ $phpbb_root_path = (defined('PHPBB_ROOT_PATH')) ? PHPBB_ROOT_PATH : './';
 $phpEx = substr(strrchr(__FILE__, '.'), 1);
 include($phpbb_root_path . 'common.' . $phpEx);
 require_once("karaoke.php");
-
+require_once("u_timer.php");
 // Start session management
 $user->session_begin();
 $auth->acl($user->data);
@@ -27,23 +27,40 @@ $mode = request_var('mode', '');
 $l_title = $user->lang['UTAKARA'];
 
 $kara = new karaoke();
-
+$timer = $kara->is_timer($user);
+$message = "";
 switch ($mode)
 {
-	case 'timer':
+	case 'become_timer':
 	{
-		$timer = 0;
-		if ($user->data["user_id"] != NULL)
-			$timer = 1;
-		if ((isset($_GET)) && (!empty($_GET)) && $_GET["want"] == 1)
+		if (!$timer)
 		{
 			$result = $kara->add_timer($user);
-			$template->assign_vars(array('message' => $result));
+			if ($user->lang("BE_TIMER_SUCCESS") != "")
+				$message = $user->lang("BE_TIMER_SUCCESS") . "<br/>";
+			else 
+				$message .= "BE_TIMER_SUCCESS" . "<br/>";
 		}
-		$template->assign_vars(array('username' => $user->data["username"],
-									  'timer'	=>	1));
+		else 
+		{
+			if ($user->lang("ALREADY_TIMER") != "")
+				$message .= $user->lang("ALREADY_TIMER") . "<br/>";
+			else 
+				$message .= "BE_TIMER_SUCCESS" . "<br/>";
+		}
+		$template->assign_vars(array('USERNAME' => $user->data["username"]));
 		$page = 'utakara_timer';
 		$title = $user->lang("TIMER");
+	}
+	break;
+	
+	case 'timer':
+	{
+		$template->assign_vars(array('USERNAME' => $user->data["username"]));
+		$value = timer_section($db, $template, $kara, $user);
+		$page = $value["page"];
+		$title = $value["title"];
+		$message .= $value["message"];
 	}
 	break;
 
@@ -145,7 +162,7 @@ switch ($mode)
 	default:
 	{
 		$result = $kara->karaList();
-		while ($row = $db->sql_fetchrow($result))
+			while ($row = $db->sql_fetchrow($result))
 		{
 			$template->assign_block_vars('list', array(
 				'ID'		=> $row['id'],
@@ -162,8 +179,9 @@ switch ($mode)
 	}
 	break;
 }
-
-$template->assign_vars(array('LINK' => "utakara.php"));
+$template->assign_vars(array('LINK' 	=> "utakara.php",
+							 'TIMER'	=>	$timer,
+							 'MESSAGE'	=>	$message));
 
 page_header($title, false);
 $template->set_filenames(array(

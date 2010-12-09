@@ -1,3 +1,11 @@
 ONHOLD == status du karaoké en attente
 TRANSFER == c'est dans le menu admin pour transférer le kara vers la partie protégé
 TIMER == menu de gestion pour timeur
+TIMER_PANEL == panneau des timeurs
+ALREADY_TIMER == message pour dire qu'il est déjà timer
+BE_TIMER_SUCCESS == message de procédure pour dire qu'il est bien devenu timeur
+TO_TIME_LIST == list des time a faire
+TIME_NOT_FOUND == pas trouvé le time
+TIME_EDIT == titre de la page d'edition
+UTA_ACCEPT == a reécrire 
+ME = moi

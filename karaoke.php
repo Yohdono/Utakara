@@ -214,12 +214,9 @@ class	karaoke
 	{
 		global	$db;
 		
-		$query = "	SELECT	`id`,
-							`name`
-					FROM	`protected_utakara`.`timers`
-					WHERE	`user_id` = " . $user->data["user_id"];
-		$result = $db->sql_query($query);
-		if (!is_empty($result))
+		$timer = $this->get_timer($user->data["uid"]);
+		$row = $db->sql_fetchrow($timer);
+		if ($row["id"] > 0)
 			return TRUE;
 		return FALSE;
 	}

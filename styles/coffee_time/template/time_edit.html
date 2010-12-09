@@ -1,0 +1,63 @@
+<!-- INCLUDE overall_header.html -->
+<!-- IF TIMER == 1 -->
+<h2>{L_KARA_EDIT}</h2>
+<div id="postingbox" class="panel">
+	<div class="inner">
+		<span class="corners-top">
+			<span></span>
+		</span>
+		<h3>{L_KARA_EDIT}</h3>
+		<!-- IF MESSAGE != ""-->
+			<span class="success">{MESSAGE}</span>
+		<!-- ENDIF -->
+		<form id="postform" method="post" action="./utakara.php?mode=edit&id={ID}" enctype="multipart/form-data">
+			<fieldset class="field1">
+				<dl>
+					<dt><label for="icon">{L_TITLE}</label></dt>
+					<dd><input id="subject" class="inputbox autowidth" type="text" name="title" value="{TITLE}"></dd>
+				</dl>
+				<dl>
+					<dt><label for="icon">{L_UTA_WHERE_FROM}</label></dt>
+					<dd><input id="origin" class="inputbox autowidth" type="text" name="origin" value="{ORIGIN}"></dd>
+				</dl>
+				<dl>
+					<dt><label for="icon">{L_UTA_NOTE}</label></dt>
+					<dd><input id="note" class="inputbox autowidth" type="text" name="note" value="{NOTE}"></dd>
+				</dl>
+				<dl>
+					<dt><label for="icon">{L_UTA_ACCEPT}</label></dt>
+					<dd>
+						<select id="accepted" name="accepted">
+						<!-- BEGIN status -->
+							<option value="{status.ID}" <!-- IF ACCEPTED eq status.ID -->selected="selected" <!-- ENDIF -->>{status.STATUS}</option>
+						<!-- END status -->
+						</select>
+						<script type="text/javascript" src="./styles/coffee_time/template/assignement.js"></script>
+						<div id="timer">
+							<span> {L_TO} </span>
+							<!-- IF U_ACP -->
+								<select id="timer_id" name="timer">
+								<!-- BEGIN timer -->
+									<option value="{timer.ID}">{timer.NAME}</option>
+								<!-- END status -->
+								</select>
+							<!-- ELSE -->
+								<select id="timer_id" name="timer">
+									<option value="{USER_ID}">{L_ME}</option>
+								</select>
+							<!-- ENDIF -->
+						</div>
+					</dd>
+				</dl>
+			</fieldset>
+			<fieldset class="submit-buttons">
+				<input class="button1 default-submit-action" type="submit" value="{L_SUBMIT}" name="post" tabindex="6" accesskey="s"/>
+			</fieldset>
+		</form>
+		<span class="corners-bottom">
+			<span></span>
+		</span>
+	</div>
+</div>
+<!-- ENDIF -->
+<!-- INCLUDE overall_footer.html -->
