@@ -56,11 +56,12 @@ switch ($mode)
 	
 	case 'timer':
 	{
-		$template->assign_vars(array('USERNAME' => $user->data["username"]));
 		$value = timer_section($db, $template, $kara, $user);
+		$template->assign_vars(array('USERNAME' => $user->data["username"]));
 		$page = $value["page"];
 		$title = $value["title"];
 		$message .= $value["message"];
+		print "debug";
 	}
 	break;
 
@@ -70,7 +71,7 @@ switch ($mode)
 		send_data_on_array('timer', $kara->get_timer(), $db, $template, $user);
 		if ((isset($_POST)) && (!empty($_POST)))
 		{
-			$result = $kara->create($_POST["title"], $_POST["origin"]);
+			$result = $kara->create($_POST["title"], $_POST["origin"], $_POST["note"]);
 			$template->assign_vars(array('iscreated' => $result));
 		}
 		$page = 'utakara_create';
@@ -162,15 +163,13 @@ switch ($mode)
 	default:
 	{
 		$result = $kara->karaList();
-			while ($row = $db->sql_fetchrow($result))
+		while ($row = $db->sql_fetchrow($result))
 		{
 			$template->assign_block_vars('list', array(
 				'ID'		=> $row['id'],
 				'TITLE'		=> html_entity_decode($row["title"]),
 				'ORIGIN'	=> html_entity_decode($row['origin']),
 				'DATE'		=> date("d/m/Y", $row['date']),
-				'NOTE'		=> $row['note'],
-				'ACCEPTED'	=> $row['accepted'],
 				'STATUS'	=> $user->lang[$row['status']]
 			));
 		}

@@ -26,12 +26,20 @@ ul.topiclist li {
 	margin: 0;
 }
 
+ul.topiclist li.news {
+	display: table;
+}
+
 ul.topiclist dl {
 	position: relative;
 }
 
 ul.topiclist li.row dl {
 	padding: 2px 0;
+}
+
+ul.topiclist li.rows {
+        min-height: 35px;
 }
 
 ul.topiclist dt {
@@ -43,11 +51,26 @@ ul.topiclist dt {
 	padding-right: 5px;
 }
 
+ul.topiclist dt.news {
+        width: 85%;
+}
+
+ul.topiclist dt.content {
+        width: 70%;
+}
+ul.topiclist dd.date{
+        width:34%;
+}
+
 ul.topiclist dd {
 	display: block;
 	float: left;
 	border-left: 1px solid #FFFFFF;
 	padding: 4px 0;
+}
+
+ul.topiclist dd.poster {
+        padding-left: 5px;
 }
 
 ul.topiclist dfn {

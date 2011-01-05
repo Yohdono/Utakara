@@ -17,7 +17,7 @@ body {
 	/* Text-Sizing with ems: http://www.clagnut.com/blog/348/ */
 	font-family: Verdana, Helvetica, Arial, sans-serif;
 	color: #828282;
-	background: url("{T_THEME_PATH}/images/bg_body.gif") 0 0 repeat-x #ADAAA5;
+	background-color: #F8EFF8;
 	/*font-size: 62.5%;			 This sets the default font size to be equivalent to 10px */
 	font-size: 10px;
 	margin: 0;
@@ -116,12 +116,8 @@ p.right {
 	margin: 0 auto;
 }
 
-#page-header {
-	min-height: 333px;
-}
-
 #page-body {
-	margin-top: 60px;
+	margin-top: 20px;
 	padding: 10px 15px;
 	clear: both;
 }
@@ -167,7 +163,6 @@ a#logo:hover {
 
 #search-box #keywords {
 	width: 95px;
-	background-color: #FFF;
 }
 
 #search-box input {

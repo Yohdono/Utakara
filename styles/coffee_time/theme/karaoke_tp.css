@@ -1,0 +1,29 @@
+/* Utakara karaoke timer panel */
+
+.u_timer_panel .ucheck {
+	width : 20px;	
+}
+
+.u_timer_panel .utitle {
+	width : 25%;
+}
+
+.u_timer_panel .uorigin {
+	width : 25%;
+}
+
+.u_timer_panel .ugrade {
+	width : 7%;
+}
+
+.u_timer_panel .udate {
+	width : 10%;
+}
+
+.u_timer_panel .uedit {
+	width : 10%;
+}
+
+.u_timer_panel .uaccept {
+	width : 10%;
+}

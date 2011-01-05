@@ -16,31 +16,6 @@
 					<dt><label for="icon">{L_UTA_WHERE_FROM}</label></dt>
 					<dd><input id="origin" class="inputbox autowidth" type="text" name="origin"></dd>
 				</dl>
-				<!-- IF U_MCP or U_ACP -->
-				<dl>
-					<dt><label for="icon">{L_UTA_NOTE}</label></dt>
-					<dd><input id="note" class="inputbox autowidth" type="text" name="note" value="{NOTE}"></dd>
-				</dl>
-				<dl>
-					<dt><label for="icon">{L_UTA_ACCEPT}</label></dt>
-					<dd>
-						<select id="accepted" name="accepted">
-						<!-- BEGIN status -->
-							<option value="{status.ID}" <!-- IF ACCEPTED eq status.ID -->selected="selected" <!-- ENDIF -->>{status.STATUS}</option>
-						<!-- END status -->
-						</select>
-						<script type="text/javascript" src="./styles/coffee_time/template/assignement.js"></script>
-						<div id="timer">
-							<span> to </span>
-							<select id="timer_id" name="timer">
-							<!-- BEGIN timer -->
-								<option value="{timer.ID}">{timer.NAME}</option>
-							<!-- END status -->
-							</select>
-						</div>
-					</dd>
-				</dl>
-				<!-- ENDIF -->
 			</fieldset>
 			<fieldset class="submit-buttons">
 				<input class="button1 default-submit-action" type="submit" value="{L_SUBMIT}" name="post" tabindex="6" accesskey="s"/>

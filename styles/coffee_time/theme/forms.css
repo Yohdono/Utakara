@@ -350,9 +350,9 @@ a.button1, a.button1:link, a.button1:visited, a.button1:active, a.button2, a.but
 
 /* Hover states */
 a.button1:hover, input.button1:hover, a.button2:hover, input.button2:hover, input.button3:hover {
-	border: 1px solid #BCBCBC;
+	border: 1px solid #66cc00;
 	background-position: 0 100%;
-	color: #BCBCBC;
+	color: #66cc00;
 }
 
 input.disabled {
@@ -381,4 +381,3 @@ input.search {
 .medium { width: 50%;}
 .narrow { width: 25%;}
 .tiny { width: 10%;}
-

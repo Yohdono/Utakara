@@ -9,3 +9,5 @@ TIME_NOT_FOUND == pas trouvé le time
 TIME_EDIT == titre de la page d'edition
 UTA_ACCEPT == a reécrire 
 ME = moi
+REFUSED = karaoké refusé
+TIMER_NOT_CONNECTED = accès refusé car par timeur

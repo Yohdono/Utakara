@@ -14,18 +14,18 @@ a:active	{ color: #d2d2d2; text-decoration: none; }
 }
 
 /* Links on gradient backgrounds */
-#search-box a:link, .navbg a:link, .forumbg .header a:link, .forabg .header a:link, th a:link {
+.navbg a:link, .forumbg .header a:link, .forabg .header a:link, th a:link {
 	color: #FFFFFF;
 	text-decoration: none;
 }
 
 #search-box a:visited, .navbg a:visited, .forumbg .header a:visited, .forabg .header a:visited, th a:visited {
-	color: #FFFFFF;
+	color: #000000;
 	text-decoration: none;
 }
 
 #search-box a:hover, .navbg a:hover, .forumbg .header a:hover, .forabg .header a:hover, th a:hover {
-	color: #ffffff;
+	color: #000;
 	text-decoration: underline;
 }
 

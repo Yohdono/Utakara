@@ -1,51 +1,51 @@
 <!-- INCLUDE overall_header.html -->
 <h2>{USERNAME} : {L_TIMER_PANEL}</h2>
-<div id="postingbox" class="panel">
-	<div class="inner">
-		<span class="corners-top">
-			<span>{MESSAGE}</span>
-		</span>
-		<h3>{L_TO_TIME_LIST}</h3>
-		<form id="postform" method="post" action="./utakara.php?mode=timer&section=todo" enctype="multipart/form-data">
-			<ul class="topiclist">
-				<li class="header">
-					<dl class="icon">
-						<dd class="check"> </dd>
-						<dd class="utitle">{L_TITLE}</dd>
-					    <dd class="uorigin">{L_ORIGIN}</dd>
-					    <dd class="udate">{L_DATE}</dd>
-					    <dd class="ugrade">{L_GRADE}</dd>
-					    <dd class="uaccept">{L_STATE}</dd>
-						<dd class="uedit">{L_EDIT}</dd>
-						<!-- IF U_ACP -->
-						<dd class="uedit">{L_TRANSFER}</dd>
-						<!-- ENDIF -->
-					</dl>
-				</li>
-			</ul>
-			<ul class="topiclist forums">
-			  <!-- BEGIN list -->
-				<li>
-					<dl>
-						<dd class="check"><input type="checkbox" name="wish" /></dd>
-					    <dd class="utitle">{list.TITLE}</dd>
-					    <dd class="uorigin">{list.ORIGIN}</dd>
-					    <dd class="udate">{list.DATE}</dd>
-					    <dd class="ugrade">{list.NOTE}</dd>
-						<dd class="uaccept">{list.STATUS}</dd>
-					    <dd class="uedit"><a href="?mode=timer&section=edit&id={list.ID}">{L_EDIT}</a></dd>
-						<!-- IF U_ACP -->
-						<dd class="utransfer"><a href="?mode=transfer&id={list.ID}">{L_TRANSFER}</a></dd>
-						<!-- ENDIF -->
-					</dl>
-				</li>
-			  <!-- END list -->
-			</ul>
-			<div class="submit-panel"><input type="submit" value="{L_WANT_TIME}" /> <input type="reset" value="{L_UNSELECT}"></div>
-		</form>
-		<span class="corners-bottom">
-			<span></span>
-		</span>
+<!-- IF TIMER == 1 -->
+	<div id="postingbox" class="panel u_timer_panel">
+		<div class="inner">
+			<span class="corners-top">
+				<span>{MESSAGE}</span>
+			</span>
+			<h3>{L_TO_TIME_LIST}</h3>
+			<form id="postform" method="post" action="./utakara.php?mode=timer&section=assign_to" enctype="multipart/form-data">
+				<table class="topiclist">
+					<tbody>
+						<tr>
+							<th class="ucheck"> </th>
+							<th class="utitle">{L_TITLE}</th>
+						    <th class="uorigin">{L_ORIGIN}</th>
+						    <th class="udate">{L_DATE}</th>
+						    <th class="ugrade">{L_GRADE}</th>
+						    <th class="uaccept">{L_STATE}</th>
+							<th class="uedit">{L_EDIT}</th>
+							<!-- IF U_ACP -->
+							<th class="utransfer">{L_TRANSFER}</th>
+							<!-- ENDIF -->
+						</tr>
+						<!-- BEGIN list -->
+							<tr>
+								<td class="ucheck"><input type="checkbox" value="{list.ID}" name="wish-{list.ID}" /></td>
+							    <td class="utitle" >{list.TITLE}</td>
+							    <td class="uorigin">{list.ORIGIN}</td>
+							    <td class="udate">{list.DATE}</td>
+							    <td class="ugrade">{list.NOTE}</td>
+								<td class="uaccept">{list.STATUS}</td>
+							    <td class="uedit"><a href="?mode=timer&section=edit&id={list.ID}">{L_EDIT}</a></td>
+								<!-- IF U_ACP -->
+									<td class="utransfer"><a href="?mode=transfer&id={list.ID}">{L_TRANSFER}</a></td>
+								<!-- ENDIF -->
+							</tr>
+						<!-- END list -->
+					</tbody>
+				</table>
+				<div class="submit-panel"><input type="submit" value="{L_WANT_TIME}" /> <input type="reset" value="{L_UNSELECT}"></div>
+			</form>
+			<span class="corners-bottom">
+				<span></span>
+			</span>
+		</div>
 	</div>
-</div>
+<!-- ELSE -->
+	<p>{L_TIMER_NOT_CONNECTED}</p>
+<!-- ENDIF -->
 <!-- INCLUDE overall_footer.html -->

@@ -1,0 +1,21 @@
+/* Utakara karaoke list */
+
+.u_list ul.topiclist dt.utitle {
+	width : 39%;
+}
+
+.u_list ul.topiclist li.header dt.utitle {
+	padding-right:0px;
+}
+
+.u_list .uorigin {
+	width : 39%;
+}
+
+.u_list .udate {
+	width : 10%;
+}
+
+.u_list .uaccept {
+	width : 10%;
+}

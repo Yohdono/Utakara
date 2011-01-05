@@ -23,14 +23,14 @@
 	width: 92px; 
 	height: 30px; 
 	display: block; 
-	background: url("{T_THEME_PATH}/images/bg_inactive.gif") 0 0 no-repeat #66605B; 
+	background: url("{T_THEME_PATH}/images/bg_inactive.gif") 0 0 no-repeat; 
 	color: #FDFDFD;  
 	text-decoration: none; 
 	text-align: center; 
 }
 
 #header ul li a:hover {
-	background: url("{T_THEME_PATH}/images/bg_active.gif") 0 0 no-repeat #66605B; 
+	background: url("{T_THEME_PATH}/images/bg_active.gif") 0 0 no-repeat; 
 	color: #1A1917;
 }
 
@@ -50,6 +50,7 @@
 #nav_icons_login {   
 	margin-top: 10px;
 	margin-left: 5%;
+        min-height: 85px;
 }
 
 #nav_icons_logout {  
@@ -57,14 +58,14 @@
 	margin-left: 22%;
 }
 
-#icon_index, #icon_memberl, #icon_pms, #icon_faqq, #icon_ucpro, #icon_6, #icon_log, #icon_regist, #icon_restore, #icon_self {
+#icon_index, #icon_memberl, #icon_pms, #icon_faqq, #icon_ucpro, #icon_6, #icon_log, #icon_regist, #icon_restore, #icon_self, #icon_ulist, #icon_ucreate, #icon_uedit, #icon_utransfer {
 	width: 100px; 
 	height: 95px; 
 	float: left; 
 	margin: 0 10px 0 0; 
 }
 
-#icon_index a, #icon_memberl a, #icon_pms a, #icon_faqq a, #icon_ucpro a, #icon_log a, #icon_regist a, #icon_restore a, #icon_self a {
+#icon_index a, #icon_memberl a, #icon_pms a, #icon_faqq a, #icon_ucpro a, #icon_log a, #icon_regist a, #icon_restore a, #icon_self a, #icon_ulist a, #icon_ucreate a, #icon_uedit a, #icon_utransfer a {
 	text-decoration: none; 
 	display: block; 
 	width: 87px; 
@@ -79,12 +80,24 @@
 }
 
 #icon_index a:hover, #icon_memberl a:hover, #icon_pms a:hover, #icon_faqq a:hover, #icon_ucpro a:hover,
-#icon_log a:hover, #icon_regist a:hover, #icon_restore a:hover, #icon_self a:hover {
+#icon_log a:hover, #icon_regist a:hover, #icon_restore a:hover, #icon_self a:hover, #icon_ulist a:hover, #icon_ucreate a:hover, #icon_uedit a:hover, #icon_utransfer a:hover {
 	background-position: 0 -95px;
 }
 
 #icon_index a { 
 	background: url("{T_THEME_PATH}/images/icon_index.png") 0 0 no-repeat;
+}
+
+#icon_ulist a {
+	background: url("{T_THEME_PATH}/images/icon_ulist.png") 0 0 no-repeat;
+}
+
+#icon_ucreate a {
+	background: url("{T_THEME_PATH}/images/icon_ucreate.png") 0 0 no-repeat;
+}
+
+#icon_uedit a {
+	background: url("{T_THEME_PATH}/images/icon_uedit.png") 0 0 no-repeat;
 }
 
 #icon_memberl a {
@@ -117,6 +130,10 @@
 
 #icon_self a {
 	background: url("{T_THEME_PATH}/images/icon_self.png") 0 0 no-repeat;
+}
+
+#icon_utransfer a {
+	background: url("{T_THEME_PATH}/images/icon_utransfer.png") 0 0 no-repeat;
 }
 
 .gohst-space {
@@ -164,8 +181,10 @@ ul.topics {
 
 /*--FOOTER--*/
 #bottom_body {
-	background: url("{T_THEME_PATH}/images/bottom_body.gif") no-repeat 0 0;
-	width: 850px;
+	background-color: #fff;
+        border: 1px solid #bdbdbd;
+        border-top: none;
+	width: 848px;
 	height: 42px;
 	margin-bottom: 5px;
 	min-height: 47px;

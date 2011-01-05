@@ -214,11 +214,24 @@ class	karaoke
 	{
 		global	$db;
 		
-		$timer = $this->get_timer($user->data["uid"]);
+		$timer = $this->get_timer($user->data["user_id"]);
 		$row = $db->sql_fetchrow($timer);
 		if ($row["id"] > 0)
-			return TRUE;
-		return FALSE;
+			return 1;
+		return 0;
+	}
+	
+	function	assign_timer($kara_id, $user)
+	{
+		global	$db;
+		
+		foreach ($kara_id as $id)
+			if (is_numeric($id))
+			{
+				$query = "	INSERT INTO `protected_utakara`.`playablekaraoketimer` (`timerid`, `karaid`)
+							VALUES (" . $user->data['user_id'] . ", " . $id . ")";
+				$db->sql_query($query); 
+			}
 	}
 	
 	function	add_timer($user)
@@ -226,19 +239,19 @@ class	karaoke
 		global	$db;
 		
 		$query = "	INSERT INTO `protected_utakara`.`timers` (`name`, `user_id`)
-					VALUES (" . $user->data['username'] . ", " . $user->data["user_id"] . ")";
+					VALUES (\"" . $user->data['username'] . "\" , '" . $user->data["user_id"] . "')";
 		return $db->sql_query($query); 
 	}
 	
 	function	get_timer($uid = NULL)
 	{
 		global	$db;
-		
+
 		$query = "	SELECT	`id`,
 							`name`
 					FROM	`protected_utakara`.`timers`";
-		if ($id)
-			$query .= " WHERE `ìd` = " . $id;
+		if ($uid)
+			$query .= " WHERE `user_id` = " . $uid;
 		return $db->sql_query($query);
 	}
 	
@@ -262,7 +275,20 @@ class	karaoke
 		$row = $db->sql_fetchrow($result);
 	}
 	
-	function	karaList($karaId = NULL)
+	function	todoList($user)
+	{
+		global	$db;
+		
+		$query = "	SELECT `karaid`
+					FROM `protected_utakara`.`playablekaraoketimer`
+					WHERE `timerid` = " . $user->data["user_id"];
+		$result = $db->sql_query($query);
+		while ($row = $db->sql_fetchrow($result))
+			$time[] = $row['karaid'];
+		return $time;
+	}
+
+	function	karaList($karaId = NULL, $exclude = NULL)
 	{
 		global	$db, $user;
 
@@ -277,17 +303,28 @@ class	karaoke
 							`uta_karaoke_status` status
 					WHERE	`status`.`id` = `public`.`accepted`";
 		if ($karaId != NULL)
-			$query .= "	AND	`public`.`id` = " . $karaId;;
+			$query .= "	AND	`public`.`id` = " . $karaId;
+		if (!empty($exclude))
+		{
+//			print_r (implode(", ", $exclude));
+			print_r ($exclude);
+			$query .= " AND `public`.`id` NOT IN (" . implode(", ", $exclude) . ")";
+		}
+		$query .= "ORDER BY `public`.`date` DESC";
 		$result = $db->sql_query($query);
 		return $result;
 	}
 	
-	function	create($title, $origin)
+	function	create($title, $origin, $note)
 	{
 		global	$db;
 
 		$title = htmlentities(htmlspecialchars(addslashes($title)));
 		$origin = htmlentities(htmlspecialchars(addslashes($origin)));
+		if (!is_numeric($note))
+			$note = "NULL";
+		else if ($note < 0 || $note > 20)
+			$note = "NULL";
 		$query = "	INSERT INTO	`utakara`.`public_fstd_origin` (
 									`title`,
 									`origin`,
@@ -297,7 +334,7 @@ class	karaoke
 					VALUES		(\"" . $title . "\",
 								\"" . $origin . "\",
 								" . time() . ",
-								null,
+								" . $note . ",
 								5)";
 		$result = $db->sql_query($query);
 		return $result;
