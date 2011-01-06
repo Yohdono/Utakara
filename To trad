@@ -11,3 +11,6 @@ UTA_ACCEPT == a reécrire
 ME = moi
 REFUSED = karaoké refusé
 TIMER_NOT_CONNECTED = accès refusé car par timeur
+MY_TODO_LIST = todo list du timer
+WANT_TIME = vouloir timé
+UNWANT_TIME = ne plus vouloir timé
