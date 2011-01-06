@@ -221,7 +221,7 @@ class	karaoke
 		return 0;
 	}
 	
-	function	assign_timer($kara_id, $user)
+	function	assign_timer($user, $kara_id)
 	{
 		global	$db;
 		
@@ -230,6 +230,20 @@ class	karaoke
 			{
 				$query = "	INSERT INTO `protected_utakara`.`playablekaraoketimer` (`timerid`, `karaid`)
 							VALUES (" . $user->data['user_id'] . ", " . $id . ")";
+				$db->sql_query($query); 
+			}
+	}
+
+	function	unassign_timer($user, $kara_id)
+	{
+		global	$db;
+		
+		foreach ($kara_id as $id)
+			if (is_numeric($id))
+			{
+				$query = "	DELETE FROM `protected_utakara`.`playablekaraoketimer` 
+							WHERE `playablekaraoketimer`.`timerid` = " . $user->data["user_id"] . 
+						 "	AND `playablekaraoketimer`.`karaid` = " . $id ;
 				$db->sql_query($query); 
 			}
 	}
@@ -303,13 +317,9 @@ class	karaoke
 							`uta_karaoke_status` status
 					WHERE	`status`.`id` = `public`.`accepted`";
 		if ($karaId != NULL)
-			$query .= "	AND	`public`.`id` = " . $karaId;
+			$query .= "	AND	`public`.`id` IN (" . $karaId . ")";
 		if (!empty($exclude))
-		{
-//			print_r (implode(", ", $exclude));
-			print_r ($exclude);
 			$query .= " AND `public`.`id` NOT IN (" . implode(", ", $exclude) . ")";
-		}
 		$query .= "ORDER BY `public`.`date` DESC";
 		$result = $db->sql_query($query);
 		return $result;

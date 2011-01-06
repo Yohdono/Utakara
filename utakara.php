@@ -57,11 +57,11 @@ switch ($mode)
 	case 'timer':
 	{
 		$value = timer_section($db, $template, $kara, $user);
-		$template->assign_vars(array('USERNAME' => $user->data["username"]));
+		$template->assign_vars(array('USERNAME' => $user->data["username"],
+									 'PAGE_TITLE' => $value["title"]));
 		$page = $value["page"];
 		$title = $value["title"];
 		$message .= $value["message"];
-		print "debug";
 	}
 	break;
 

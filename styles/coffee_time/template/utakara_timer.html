@@ -1,13 +1,20 @@
 <!-- INCLUDE overall_header.html -->
-<h2>{USERNAME} : {L_TIMER_PANEL}</h2>
+<h2>{USERNAME} : {PAGE_TITLE}</h2>
 <!-- IF TIMER == 1 -->
 	<div id="postingbox" class="panel u_timer_panel">
 		<div class="inner">
+			<div id="timer_panel">
+				<ul id="menu">
+					<li><a href="./utakara.php?mode=timer">{L_TIMER_PANEL}</a></li>
+					<li><a href="./utakara.php?mode=timer&section=todo">{L_TODO_LIST}</a></li>
+				</ul>
+			</div>
+		
 			<span class="corners-top">
 				<span>{MESSAGE}</span>
 			</span>
 			<h3>{L_TO_TIME_LIST}</h3>
-			<form id="postform" method="post" action="./utakara.php?mode=timer&section=assign_to" enctype="multipart/form-data">
+			<form id="postform" method="post" action="#" enctype="multipart/form-data">
 				<table class="topiclist">
 					<tbody>
 						<tr>
@@ -38,7 +45,15 @@
 						<!-- END list -->
 					</tbody>
 				</table>
-				<div class="submit-panel"><input type="submit" value="{L_WANT_TIME}" /> <input type="reset" value="{L_UNSELECT}"></div>
+				<div class="submit-panel">
+					<select name="action">
+						<!-- BEGIN action -->
+						<option value="{action.VALUE}">{action.TITLE}</option>
+						<!-- END action -->
+					</select>
+					<input type="submit" value="{L_GO}" />
+					<input type="reset" value="{L_UNSELECT}">
+				</div>
 			</form>
 			<span class="corners-bottom">
 				<span></span>
