@@ -1,8 +1,8 @@
 <?php exit; ?>
-1290698604
+1294412626
 SELECT s.style_id, c.theme_id, c.theme_data, c.theme_path, c.theme_name, c.theme_mtime, i.*, t.template_path FROM Uta_styles s, Uta_styles_template t, Uta_styles_theme c, Uta_styles_imageset i WHERE s.style_id = 3 AND t.template_id = s.template_id AND c.theme_id = s.theme_id AND i.imageset_id = s.imageset_id
-75830
-a:1:{i:0;a:11:{s:8:"style_id";s:1:"3";s:8:"theme_id";s:1:"3";s:10:"theme_data";s:75415:"/*  phpBB 3.0 Style Sheet
+80188
+a:1:{i:0;a:11:{s:8:"style_id";s:1:"3";s:8:"theme_id";s:1:"3";s:10:"theme_data";s:79773:"/*  phpBB 3.0 Style Sheet
     --------------------------------------------------------------
 	phpBB style name: coffee_time
 	Based on style:   prosilver (this is the default phpBB3 style)
@@ -2798,8 +2798,7 @@ dl.icon {
 * html .forumbg table.table1 {
 	margin: 0 -2px 0px -1px;
 }
-/*  	
---------------------------------------------------------------
+/* --------------------------------------------------------------
 Colours and backgrounds for common.css
 -------------------------------------------------------------- */
 
@@ -4016,37 +4015,54 @@ ul.topics {
 	margin-bottom: 5px;
 	min-height: 47px;
 }
+/* Utakara karaoke list */
 
-/* utakara style */
-
-ul.topiclist dt.utitle {
-	width : 20%;
+.u_list ul.topiclist dt.utitle {
+	width : 39%;
 }
 
-ul.topiclist li.header dt.utitle {
+.u_list ul.topiclist li.header dt.utitle {
 	padding-right:0px;
 }
 
-.uorigin {
-	width : 20%;
+.u_list .uorigin {
+	width : 39%;
 }
 
-.udate {
+.u_list .udate {
 	width : 10%;
 }
 
-.ugrade {
-	width : 8%;
+.u_list .uaccept {
+	width : 10%;
+}
+/* Utakara karaoke timer panel */
+
+.u_timer_panel .ucheck {
+	width : 20px;	
 }
 
-.uaccept {
+.u_timer_panel .utitle {
+	width : 25%;
+}
+
+.u_timer_panel .uorigin {
+	width : 25%;
+}
+
+.u_timer_panel .ugrade {
+	width : 7%;
+}
+
+.u_timer_panel .udate {
 	width : 10%;
 }
 
-.uedit {
-	width : 8%;
+.u_timer_panel .uedit {
+	width : 10%;
 }
 
-.udelete {
-	width : 8%;
-}";s:10:"theme_path";s:11:"coffee_time";s:10:"theme_name";s:11:"coffee_time";s:11:"theme_mtime";s:10:"1287520065";s:11:"imageset_id";s:1:"3";s:13:"imageset_name";s:11:"coffee_time";s:18:"imageset_copyright";s:31:"&copy; CoSa NoStrA DeSiGn, 2008";s:13:"imageset_path";s:11:"coffee_time";s:13:"template_path";s:11:"coffee_time";}}
+.u_timer_panel .uaccept {
+	width : 10%;
+}
+";s:10:"theme_path";s:11:"coffee_time";s:10:"theme_name";s:11:"coffee_time";s:11:"theme_mtime";s:10:"1292294674";s:11:"imageset_id";s:1:"3";s:13:"imageset_name";s:11:"coffee_time";s:18:"imageset_copyright";s:31:"&copy; CoSa NoStrA DeSiGn, 2008";s:13:"imageset_path";s:11:"coffee_time";s:13:"template_path";s:11:"coffee_time";}}

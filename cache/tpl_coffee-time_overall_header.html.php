@@ -202,7 +202,16 @@
 			<?php if ($this->_rootref['TIMER'] == (1)) {  ?>
 
 			<div id="icon_ucreate">
-				<a title="<?php echo ((isset($this->_rootref['L_BE_TIMER'])) ? $this->_rootref['L_BE_TIMER'] : ((isset($user->lang['BE_TIMER'])) ? $user->lang['BE_TIMER'] : '{ BE_TIMER }')); ?>" href="utakara.php?mode=timer">
+				<a title="<?php echo ((isset($this->_rootref['L_TIMER_PANEL'])) ? $this->_rootref['L_TIMER_PANEL'] : ((isset($user->lang['TIMER_PANEL'])) ? $user->lang['TIMER_PANEL'] : '{ TIMER_PANEL }')); ?>" href="utakara.php?mode=timer">
+					<span class="gohst-space"></span>
+					<?php echo ((isset($this->_rootref['L_TIMER_PANEL'])) ? $this->_rootref['L_TIMER_PANEL'] : ((isset($user->lang['TIMER_PANEL'])) ? $user->lang['TIMER_PANEL'] : '{ TIMER_PANEL }')); ?>
+
+				</a>
+			</div>
+			<?php } else { ?>
+
+			<div id="icon_ucreate">
+				<a title="<?php echo ((isset($this->_rootref['L_BE_TIMER'])) ? $this->_rootref['L_BE_TIMER'] : ((isset($user->lang['BE_TIMER'])) ? $user->lang['BE_TIMER'] : '{ BE_TIMER }')); ?>" href="utakara.php?mode=become_timer">
 					<span class="gohst-space"></span>
 					<?php echo ((isset($this->_rootref['L_BE_TIMER'])) ? $this->_rootref['L_BE_TIMER'] : ((isset($user->lang['BE_TIMER'])) ? $user->lang['BE_TIMER'] : '{ BE_TIMER }')); ?>
 
