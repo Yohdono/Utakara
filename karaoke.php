@@ -441,7 +441,7 @@ class			karaoke
 	
 	function	edit($id, $value)
 	{
-		global	$db;
+		global	$db, $user;
 		
 		if (!is_numeric($value['accepted']) || !is_numeric($value['note']))
 			return FALSE;
@@ -451,6 +451,7 @@ class			karaoke
 							`note` = " . $value['note'] . ",
 							`accepted` = " . $value['accepted'] . " 
 					WHERE	`public_fstd_origin`.`id` = " . $id;
+		print $query;
 		$result = $db->sql_query($query);
 		if ($result == TRUE)
 			return ($this->set_message($user->lang("EDIT_SUCCESS"), TRUE));

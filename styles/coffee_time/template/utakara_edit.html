@@ -1,16 +1,20 @@
 <!-- INCLUDE overall_header.html -->
 <!-- IF U_MCP or U_ACP -->
 <h2>{L_KARA_EDIT}</h2>
+<!-- IF MESSAGE != "" -->
+<div class="message">
+	<ul>
+		{MESSAGE}
+	</ul>
+</div>
+<!-- ENDIF -->
 <div id="postingbox" class="panel">
 	<div class="inner">
 		<span class="corners-top">
 			<span></span>
 		</span>
 		<h3>{L_KARA_EDIT}</h3>
-		<!-- IF MESSAGE -->
-			<span class="success">{MESSAGE}</span>
-		<!-- ENDIF -->
-		<form id="postform" method="post" action="./utakara.php?mode=edit&id={ID}" enctype="multipart/form-data">
+		<form id="postform" method="post" action="./utakara.php?mode=timer&section=edit&id={ID}" enctype="multipart/form-data">
 			<fieldset class="field1">
 				<dl>
 					<dt><label for="icon">{L_TITLE}</label></dt>

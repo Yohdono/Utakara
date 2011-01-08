@@ -43,19 +43,16 @@ function	timer_section($db, $template, $kara, $user)
 	{		
 		case 'edit':
 		{
+			print ("test");
 			send_data_on_array('status', $kara->get_status(), $db, $template, $user);
 			send_data_on_array('timer', $kara->get_timer(), $db, $template, $user);
 			if (!empty($_GET["id"]))
 				if (is_numeric($_GET["id"]))
 					$kara_id = $_GET["id"];
 				else 
-					$page_value["message"] .= $user->lang("TIME_NOT_FOUND") . "<br/>";
+					$page_value["message"] .= $kara->set_message($user->lang("TIME_NOT_FOUND"), FALSE);
 			if ((isset($_POST)) && (!empty($_POST)))
-			{
-				$result = $kara->edit($kara_id, $_POST);
-				if ($result)
-					$page_value["message"] .= $user->lang("EDIT_SUCCESS") . "<br />";
-			}
+				$page_value["message"] .= $kara->edit($kara_id, $_POST);
 			$result = $kara->karaList($_GET["id"]);
 			$row = $db->sql_fetchrow($result);
 			$template->assign_vars(array(
