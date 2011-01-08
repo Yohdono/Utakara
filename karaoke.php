@@ -443,8 +443,10 @@ class			karaoke
 	{
 		global	$db, $user;
 		
-		if (!is_numeric($value['accepted']) || !is_numeric($value['note']))
-			return FALSE;
+		if (!is_numeric($value['accepted']))
+			return ($this->set_message($user->lang("EDIT_FAILED"), FALSE));
+		else if (!is_numeric($value["note"] || $value["note"] > 20 || $value["note"] < 0 ))
+			$value["note"] = "NULL";
 		$query = "	UPDATE	`utakara`.`public_fstd_origin` SET 
 							`title` = '" . htmlentities(htmlspecialchars(addslashes($value['title']))) . "',
 							`origin` = '" . htmlentities(htmlspecialchars(addslashes($value['origin']))) .	"',

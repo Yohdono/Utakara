@@ -43,7 +43,6 @@ function	timer_section($db, $template, $kara, $user)
 	{		
 		case 'edit':
 		{
-			print ("test");
 			send_data_on_array('status', $kara->get_status(), $db, $template, $user);
 			send_data_on_array('timer', $kara->get_timer(), $db, $template, $user);
 			if (!empty($_GET["id"]))
