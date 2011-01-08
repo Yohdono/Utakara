@@ -7,7 +7,7 @@ $(document).ready(function(){
 function onSelectChange(){
 	var selected = $("#accepted option:selected");
 	
-	if (selected.val() == 3)
+	if (selected.val() == 4)
 		$("#timer").show();
 	else
 		$("#timer").hide();

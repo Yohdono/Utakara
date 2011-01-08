@@ -24,8 +24,31 @@ function	send_data_on_array($name, $data, $db, $template, $user = NULL)
 	}
 }
 
-class	karaoke
-{
+class			karaoke
+{	
+	function	set_message($msg, $type)
+	{
+		if ($type == TRUE)
+			return "<li class=\"success\">" . $msg . "</li>";
+		return "<li class=\"error\">" . $msg . "</li>";
+	}
+	
+	function	set_status($kara_id, $status_id)
+	{
+		global	$db;
+		
+		if (is_numeric($kara_id) && is_numeric($status_id))
+		{
+			$query = "	UPDATE `utakara`.`public_fstd_origin`
+						SET `accepted` = " . $status_id . "
+						WHERE id = " . $kara_id;
+			$result = $db->sql_query($query);
+			print $result;
+			return (TRUE);
+		}
+		return (FALSE);
+	}
+	
 	function	add_status($status)
 	{
 		global	$db;
@@ -210,9 +233,9 @@ class	karaoke
 		return $result;
 	}
 	
-	function	is_timer($user)
+	function	is_timer()
 	{
-		global	$db;
+		global	$db, $user;
 		
 		$timer = $this->get_timer($user->data["user_id"]);
 		$row = $db->sql_fetchrow($timer);
@@ -221,40 +244,106 @@ class	karaoke
 		return 0;
 	}
 	
-	function	assign_timer($user, $kara_id)
+	function	delete_time($kara_id)
 	{
-		global	$db;
+		global	$user;
+		$message = "";
 		
-		foreach ($kara_id as $id)
+		foreach ($kara_id as $key => $id)
 			if (is_numeric($id))
 			{
-				$query = "	INSERT INTO `protected_utakara`.`playablekaraoketimer` (`timerid`, `karaid`)
-							VALUES (" . $user->data['user_id'] . ", " . $id . ")";
-				$db->sql_query($query); 
-			}
-	}
-
-	function	unassign_timer($user, $kara_id)
-	{
-		global	$db;
-		
-		foreach ($kara_id as $id)
-			if (is_numeric($id))
-			{
-				$query = "	DELETE FROM `protected_utakara`.`playablekaraoketimer` 
-							WHERE `playablekaraoketimer`.`timerid` = " . $user->data["user_id"] . 
-						 "	AND `playablekaraoketimer`.`karaid` = " . $id ;
-				$db->sql_query($query); 
+				if ($this->delete($id) == TRUE)
+					$message .= $this->set_message($user->lang("TIME_DELETED" . " : " . $key), TRUE);
+				else
+					$message .= $this->set_message($user->lang("TIME_DELETED_FAILED") . " : " . $key, FALSE); 
 			}
 	}
 	
-	function	add_timer($user)
+	function	refuse_time($kara_id)
+	{
+		global	$user;
+		$message = "";
+		
+		foreach ($kara_id as $key => $id)
+			if (is_numeric($id))
+			{
+				if ($this->set_status($id, 2) == TRUE)
+					$message .= $this->set_message($user->lang("TIME_REFUSED") . " : " . $key, TRUE);
+				else
+					$message .= $this->set_message($user->lang("TIME_REFUSED_FAILED") . " : " . $key, FALSE); 
+			}
+	}
+	
+	function	is_assigned($user_id, $kara_id)
 	{
 		global	$db;
 		
+		$query = "	SELECT	t.`karaid`
+					FROM	`protected_utakara`.`playablekaraoketimer` t
+					WHERE t.`timerid` = " . $user_id . "  
+					AND t.`karaid` = " . $kara_id;
+		$result = $db->sql_query($query);
+		$row = $db->sql_fetchrow($timer);
+		if ($row["karaid"] != NULL)
+			return (TRUE);
+		return (FALSE);
+	}
+	
+	function	assign_timer($kara_id, $user_id = NULL)
+	{
+		global	$db, $user;
+		$message = "";
+		
+		if ($user_id == NULL)
+			$user_id = $user->data['user_id'];
+		foreach ($kara_id as $key => $id)
+			if (is_numeric($id))
+				if (!$this->is_assigned($user_id, $id))
+				{
+					$query = "	INSERT INTO `protected_utakara`.`playablekaraoketimer` (`timerid`, `karaid`)
+								VALUES (" . $user_id . ", " . $id . ")";
+					$result = $db->sql_query($query);
+					if ($result == TRUE)
+						$message .= $this->set_message($user->lang("ASSIGN_SUCCESS") . " : " . $key, TRUE);
+					else 
+						$message .= $this->set_message($user->lang("ASSIGN_FAILED") . " : " . $key, FALSE);
+					$this->set_status($kara_id, 4);
+				}
+		return ($message); 
+	}
+
+	function	unassign_timer($kara_id, $user_id = NULL)
+	{
+		global	$db, $user;
+		$message = "";
+		
+		if ($user_id == NULL)
+			$user_id = $user->data['user_id'];
+		foreach ($kara_id as $key => $id)
+			if (is_numeric($id))
+			{
+				$query = "	DELETE FROM `protected_utakara`.`playablekaraoketimer` 
+							WHERE `playablekaraoketimer`.`timerid` = " . $user_id . 
+						 "	AND `playablekaraoketimer`.`karaid` = " . $id ;
+				$result = $db->sql_query($query);
+				if ($result == TRUE)
+					$message .= $this->set_message($user->lang("UNASSIGN_SUCCESS") . " : " . $key, TRUE);
+				else 
+					$message .= $this->set_message($user->lang("UNASSIGN_FAILED") . " : " . $key, FALSE); 
+			}
+		return ($message);
+	}
+	
+	function	add_timer()
+	{
+		global	$db, $user;
+		
 		$query = "	INSERT INTO `protected_utakara`.`timers` (`name`, `user_id`)
 					VALUES (\"" . $user->data['username'] . "\" , '" . $user->data["user_id"] . "')";
-		return $db->sql_query($query); 
+		$result = $db->sql_query($query);
+		if ($result == TRUE)
+			return ($this->set_message($user->lang("BE_TIMER_SUCCESS", TRUE)));
+		return  ($this->set_message($user->lang("ALREADY_TIMER", FALSE)));
 	}
 	
 	function	get_timer($uid = NULL)
@@ -289,9 +378,9 @@ class	karaoke
 		$row = $db->sql_fetchrow($result);
 	}
 	
-	function	todoList($user)
+	function	todoList()
 	{
-		global	$db;
+		global	$db, $user;
 		
 		$query = "	SELECT `karaid`
 					FROM `protected_utakara`.`playablekaraoketimer`
@@ -327,13 +416,11 @@ class	karaoke
 	
 	function	create($title, $origin, $note)
 	{
-		global	$db;
+		global	$db, $user;
 
 		$title = htmlentities(htmlspecialchars(addslashes($title)));
 		$origin = htmlentities(htmlspecialchars(addslashes($origin)));
-		if (!is_numeric($note))
-			$note = "NULL";
-		else if ($note < 0 || $note > 20)
+		if (!is_numeric($note) || $note < 0 || $note > 20)
 			$note = "NULL";
 		$query = "	INSERT INTO	`utakara`.`public_fstd_origin` (
 									`title`,
@@ -345,9 +432,11 @@ class	karaoke
 								\"" . $origin . "\",
 								" . time() . ",
 								" . $note . ",
-								5)";
+								1)";
 		$result = $db->sql_query($query);
-		return $result;
+		if ($result == TRUE)
+			return ($this->set_message($user->lang("REQUEST_SUCCESS"), TRUE));
+		return ($this->set_message($user->lang("REQUEST_FAILED"), FALSE));
 	}
 	
 	function	edit($id, $value)
@@ -363,7 +452,9 @@ class	karaoke
 							`accepted` = " . $value['accepted'] . " 
 					WHERE	`public_fstd_origin`.`id` = " . $id;
 		$result = $db->sql_query($query);
-		return $result;
+		if ($result == TRUE)
+			return ($this->set_message($user->lang("EDIT_SUCCESS"), TRUE));
+		return ($this->set_message($user->lang("EDIT_FAILED"), FALSE));
 	}
 	
 	function	delete($id)

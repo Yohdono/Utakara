@@ -2,7 +2,7 @@ ONHOLD == status du karaoké en attente
 TRANSFER == c'est dans le menu admin pour transférer le kara vers la partie protégé
 TIMER == menu de gestion pour timeur
 TIMER_PANEL == panneau des timeurs
-ALREADY_TIMER == message pour dire qu'il est déjà timer
+ALREADY_TIMER == message pour dire qu'il est déjà timeur
 BE_TIMER_SUCCESS == message de procédure pour dire qu'il est bien devenu timeur
 TO_TIME_LIST == list des time a faire
 TIME_NOT_FOUND == pas trouvé le time
@@ -14,3 +14,15 @@ TIMER_NOT_CONNECTED = accès refusé car par timeur
 MY_TODO_LIST = todo list du timer
 WANT_TIME = vouloir timé
 UNWANT_TIME = ne plus vouloir timé
+INTEGRATED = karaoké intégré dans la toyunda
+REFUSED = karaoké refuser
+REQUEST_SUCCESS = la demande a était créer
+REQUEST_FAILED = la demande a échoué
+ASSIGN_SUCCESS = assigner avec succès
+ASSIGN_FAILED = assignement échouer
+UNASSIGN_SUCCESS = désassignement a un kara avec succès
+UNASSIGN_FAILED = désassignement échouer
+TIME_REFUSED = time refusé
+TIME_REFUSED_FAILED = time refusé échouer
+TIME_DELETED = supprimer un time
+TIME_DELETED_FAILES = supprimer un time échouer

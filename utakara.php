@@ -27,28 +27,14 @@ $mode = request_var('mode', '');
 $l_title = $user->lang['UTAKARA'];
 
 $kara = new karaoke();
-$timer = $kara->is_timer($user);
+$timer = $kara->is_timer();
 $message = "";
 switch ($mode)
 {
 	case 'become_timer':
 	{
 		if (!$timer)
-		{
-			$result = $kara->add_timer($user);
-			if ($user->lang("BE_TIMER_SUCCESS") != "")
-				$message = $user->lang("BE_TIMER_SUCCESS") . "<br/>";
-			else 
-				$message .= "BE_TIMER_SUCCESS" . "<br/>";
-		}
-		else 
-		{
-			if ($user->lang("ALREADY_TIMER") != "")
-				$message .= $user->lang("ALREADY_TIMER") . "<br/>";
-			else 
-				$message .= "BE_TIMER_SUCCESS" . "<br/>";
-		}
-		$template->assign_vars(array('USERNAME' => $user->data["username"]));
+			$message .= $kara->add_timer();
 		$page = 'utakara_timer';
 		$title = $user->lang("TIMER");
 	}
@@ -56,9 +42,10 @@ switch ($mode)
 	
 	case 'timer':
 	{
+		/* a refaire */
+		
 		$value = timer_section($db, $template, $kara, $user);
-		$template->assign_vars(array('USERNAME' => $user->data["username"],
-									 'PAGE_TITLE' => $value["title"]));
+		$template->assign_vars(array('PAGE_TITLE' => $value["title"]));
 		$page = $value["page"];
 		$title = $value["title"];
 		$message .= $value["message"];
@@ -70,10 +57,7 @@ switch ($mode)
 		send_data_on_array('status', $kara->get_status(), $db, $template, $user);
 		send_data_on_array('timer', $kara->get_timer(), $db, $template, $user);
 		if ((isset($_POST)) && (!empty($_POST)))
-		{
-			$result = $kara->create($_POST["title"], $_POST["origin"], $_POST["note"]);
-			$template->assign_vars(array('iscreated' => $result));
-		}
+			$message .= $kara->create($_POST["title"], $_POST["origin"], $_POST["note"]);
 		$page = 'utakara_create';
 		$title = "Create karaoke";
 	}
@@ -83,13 +67,8 @@ switch ($mode)
 	{
 		send_data_on_array('status', $kara->get_status(), $db, $template, $user);
 		send_data_on_array('timer', $kara->get_timer(), $db, $template, $user);
-		
 		if ((isset($_POST)) && (!empty($_POST)))
-		{
-			$result = $kara->edit($_GET['id'], $_POST);
-			if ($result)
-				$template->assign_vars(array('MESSAGE' => $user->lang("EDIT_SUCCESS")));
-		}
+			$message .= $kara->edit($_GET['id'], $_POST);
 		$result = $kara->karaList($_GET["id"]);
 		$row = $db->sql_fetchrow($result);
 		$template->assign_vars(array(
@@ -180,7 +159,8 @@ switch ($mode)
 }
 $template->assign_vars(array('LINK' 	=> "utakara.php",
 							 'TIMER'	=>	$timer,
-							 'MESSAGE'	=>	$message));
+							 'MESSAGE'	=>	$message,
+							 'USERNAME' => $user->data["username"]));
 
 page_header($title, false);
 $template->set_filenames(array(

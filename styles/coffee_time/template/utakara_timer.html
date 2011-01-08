@@ -1,18 +1,21 @@
 <!-- INCLUDE overall_header.html -->
+<div id="timer_menu">
+	<ul id="menu">
+		<li><a href="./utakara.php?mode=timer">{L_TIMER_PANEL}</a></li>
+		<li><a href="./utakara.php?mode=timer&section=todo">{L_TODO_LIST}</a></li>
+	</ul>
+</div>
 <h2>{USERNAME} : {PAGE_TITLE}</h2>
+<!-- IF MESSAGE != "" -->
+<div class="message">
+	<ul>
+		{MESSAGE}
+	</ul>
+</div>
+<!-- ENDIF -->
 <!-- IF TIMER == 1 -->
 	<div id="postingbox" class="panel u_timer_panel">
 		<div class="inner">
-			<div id="timer_panel">
-				<ul id="menu">
-					<li><a href="./utakara.php?mode=timer">{L_TIMER_PANEL}</a></li>
-					<li><a href="./utakara.php?mode=timer&section=todo">{L_TODO_LIST}</a></li>
-				</ul>
-			</div>
-		
-			<span class="corners-top">
-				<span>{MESSAGE}</span>
-			</span>
 			<h3>{L_TO_TIME_LIST}</h3>
 			<form id="postform" method="post" action="#" enctype="multipart/form-data">
 				<table class="topiclist">
@@ -31,7 +34,7 @@
 						</tr>
 						<!-- BEGIN list -->
 							<tr>
-								<td class="ucheck"><input type="checkbox" value="{list.ID}" name="wish-{list.ID}" /></td>
+								<td class="ucheck"><input type="checkbox" value="{list.ID}" name="{list.TITLE} - {list.ORIGIN}" /></td>
 							    <td class="utitle" >{list.TITLE}</td>
 							    <td class="uorigin">{list.ORIGIN}</td>
 							    <td class="udate">{list.DATE}</td>

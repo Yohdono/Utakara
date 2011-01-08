@@ -1,24 +1,44 @@
 <?php
-function	toTime($kara, $user)
-{
-	$kara->assign_timer($user, $_POST);
-}
 
 function	unwantToTime($kara, $user)
 {
 	$kara->unassign_timer($user, $_POST);
 }
 
+function	action($page)
+{
+	global	$user;
+	$i = 0;
+	
+	if ($page == "todo")
+	{
+		$action[$i]['VALUE'] = "unassign_timer";
+		$action[$i++]['TITLE'] = ($user->lang["UNWANT_TIME"]) == "" ? ("UNWANT_TIME") : ($user->lang["UNWANT_TIME"]);
+	} 
+	else if ($page == "list")
+	{
+		$action[$i]['VALUE'] = "assign_timer";
+		$action[$i++]['TITLE'] = ($user->lang["WANT_TIME"]) == "" ? ("WANT_TIME") : ($user->lang["WANT_TIME"]);
+		$action[$i]['VALUE'] = "refuse_time";
+		$action[$i++]['TITLE'] = ($user->lang["ALREADY_TIMED"]) == "" ? ("ALREADY_TIMED") : ($user->lang["ALREADY_TIMED"]); 
+		
+	}
+	if ($user->data['user_id'] == 2)
+	{
+		$action[$i]['VALUE'] = "delete_time";
+		$action[$i++]['TITLE'] = ($user->lang["DELETE_TIME"]) == "" ? ("DELETE_TIME") : ($user->lang["DELETE_TIME"]); 
+	}
+	return ($action);
+}
+
 function	timer_section($db, $template, $kara, $user)
 {
-	if (isset($_POST['action']))
-		if (function_exists($_POST['action']))
-			call_user_func($_POST['action'], $kara, $user);
-		else
-			print ($_POST['action']);
 	$page_value;
 	$page_value["message"] = "";
 	$section = htmlentities(htmlspecialchars(addslashes($_GET["section"])));
+	if (isset($_POST['action']))
+		if (method_exists($kara, $_POST['action']))
+			$page_value["message"] .= call_user_method($_POST['action'], $kara, $_POST);
 	switch	($section)
 	{		
 		case 'edit':
@@ -54,16 +74,12 @@ function	timer_section($db, $template, $kara, $user)
 		
 		case 'todo' :
 		{
-			$list = $kara->todoList($user);
+			$list = $kara->todoList();
 			if (!empty($list))
 				$result = $kara->karaList(implode(", ", $list));
-/* TEST	*/
-			$action[0]['VALUE'] = "unwantToTime";
-			$action[0]['TITLE'] = ($user->lang["UNWANT_TIME"]) == "" ? ("UNWANT_TIME") : ($user->lang["UNWANT_TIME"]); 
+			$action = action("todo");
 			foreach ($action as $option)
 				$template->assign_block_vars('action', $option);
-/* FIN */
-			
 			while ($row = $db->sql_fetchrow($result))
 			{
 				$template->assign_block_vars('list', array(
@@ -83,15 +99,10 @@ function	timer_section($db, $template, $kara, $user)
 		
 		default:
 		{
-/* TEST */			
-			$action[0]['VALUE'] = "toTime";
-			$action[0]['TITLE'] = ($user->lang["WANT_TIME"]) == "" ? ("WANT_TIME") : ($user->lang["WANT_TIME"]); 
+			$action = action("list");
 			foreach ($action as $option)
 				$template->assign_block_vars('action', $option);
-
-/* FIN */
-			
-			$result = $kara->karaList(NULL, $kara->todoList($user));
+			$result = $kara->karaList(NULL, $kara->todoList());
 			while ($row = $db->sql_fetchrow($result))
 			{
 				$template->assign_block_vars('list', array(
