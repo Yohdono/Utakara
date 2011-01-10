@@ -19,3 +19,16 @@
 .u_list .uaccept {
 	width : 10%;
 }
+
+.message ul {
+	list-style: none;
+	font-weight: bold;
+}
+
+.message ul .success {
+	color : #66CC00;
+}
+
+.message ul .error {
+	color : #66CC00;
+}

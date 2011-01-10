@@ -43,7 +43,6 @@ class			karaoke
 						SET `accepted` = " . $status_id . "
 						WHERE id = " . $kara_id;
 			$result = $db->sql_query($query);
-			print $result;
 			return (TRUE);
 		}
 		return (FALSE);
@@ -413,6 +412,21 @@ class			karaoke
 		$result = $db->sql_query($query);
 		return $result;
 	}
+
+	function	is_created($title, $origin)
+	{
+		global	$db;
+		
+		$query = "	SELECT 	`id`
+					FROM `utakara`.`public_fstd_origin`
+					WHERE `title` LIKE \"" . $title . "\"
+					AND `origin` LIKE \"" . $origin . "\"";
+		$result = $db->sql_query($query);
+		$row = $db->sql_fetchrow($result);
+		if ($row['id'] > 0)
+			return (TRUE);
+		return (FALSE);
+	}
 	
 	function	create($title, $origin, $note)
 	{
@@ -420,6 +434,8 @@ class			karaoke
 
 		$title = htmlentities(htmlspecialchars(addslashes($title)));
 		$origin = htmlentities(htmlspecialchars(addslashes($origin)));
+		if ($this->is_created($title, $origin))
+			return ($this->set_message($user->lang("ALREADY_REQUESTED"), FALSE));
 		if (!is_numeric($note) || $note < 0 || $note > 20)
 			$note = "NULL";
 		$query = "	INSERT INTO	`utakara`.`public_fstd_origin` (
@@ -453,7 +469,6 @@ class			karaoke
 							`note` = " . $value['note'] . ",
 							`accepted` = " . $value['accepted'] . " 
 					WHERE	`public_fstd_origin`.`id` = " . $id;
-		print $query;
 		$result = $db->sql_query($query);
 		if ($result == TRUE)
 			return ($this->set_message($user->lang("EDIT_SUCCESS"), TRUE));
