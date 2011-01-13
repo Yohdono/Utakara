@@ -40,7 +40,7 @@ function	timer_section($db, $template, $kara, $user)
 		if (method_exists($kara, $_POST['action']))
 			$page_value["message"] .= call_user_method($_POST['action'], $kara, $_POST);
 	switch	($section)
-	{		
+	{
 		case 'edit':
 		{
 			send_data_on_array('status', $kara->get_status(), $db, $template, $user);

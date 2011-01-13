@@ -475,6 +475,13 @@ class			karaoke
 		return ($this->set_message($user->lang("EDIT_FAILED"), FALSE));
 	}
 	
+	function finish($value)
+	{
+		global	$db, $user;
+		
+		
+	}
+	
 	function	delete($id)
 	{
 		global	$db;
